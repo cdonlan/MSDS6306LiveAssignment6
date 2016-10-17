@@ -1,0 +1,69 @@
+---
+title: "LiveSessionAssignment06: Rolling Sales for Manhattan"
+author: "Christopher Donlan, Rajni Goyal, and Justin Beer"
+date: "October 14, 2016"
+output: html_document
+---
+
+```{r echo=FALSE, results='hide', message=FALSE}
+library(plyr)
+library(gdata)
+getwd()
+mh <- read.csv("rollingsales_manhattan.csv",skip=4,header=TRUE)
+head(mh)
+summary(mh)
+str(mh)
+mh$SALE.PRICE.N <- as.numeric(gsub("[^[:digit:]]","", mh$SALE.PRICE))
+count(is.na(mh$SALE.PRICE.N))
+names(mh) <- tolower(names(mh)) # make all variable names lower case
+mh$gross.sqft <- as.numeric(gsub("[^[:digit:]]","", mh$gross.square.feet))
+head(mh$gross.sqft)
+mh$land.sqft <- as.numeric(gsub("[^[:digit:]]","", mh$land.square.feet))
+head(mh$land.sqft)
+mh$year.built <- as.numeric(as.character(mh$year.built))
+head(mh$year.built)
+attach(mh)
+detach(mh)
+mh.sale <- mh[mh$sale.price.n!=0,]
+mh.homes <- mh.sale[which(grepl("FAMILY",mh.sale$building.class.category)),]
+```
+
+## Purpose
+
+This document outlines our loading, cleaning, and exploratory analysis of the data for Manhattan rolling home sales.  
+
+## Loading and Cleaning the Data
+
+In order to load the data we used the read.csv function after we placed the csv file in our working directory. After loading the data we moved onto cleaning up the data. We had to set the sales price as a numeric, change the names to lower case, remove incorrect leading digits, and keep only the actual sales. Also to note, since the sales numbers are very large, they're on the scale E+000.
+  
+## Exploratory Data Analysis
+
+Let us now move onto our findings for the exploratory data analysis. We only analyzed the 1, 2, and 3 family homes. First, we will plot these homes as a log10 chart of the Gross Square Footage versus the Sales Price. From this we can see that we have several outliers but that there is also a minor trend showing the possibility of the sales price increasing as the gross square footage increases.
+
+```{r echo=FALSE}
+mh.homes <- mh.sale[which(grepl("FAMILY",mh.sale$building.class.category)),]
+plot(log10(mh.homes$gross.sqft),log10(mh.homes$sale.price.n))
+```  
+
+In order to investigate this further, we will now remove the outliers we saw in the log10 plot. After removing the outliers we visualized the data with a natural log plot. Below we can see that there is a clearer trend of increasing sales price as the gross square footage increases as compared to the log10 plot.
+
+```{r echo=FALSE}
+mh.homes$outliers <- (log10(mh.homes$sale.price.n) <=5) + 0
+mh.homes <- mh.homes[which(mh.homes$outliers==0),]
+plot(log(mh.homes$gross.sqft),log(mh.homes$sale.price.n))
+```  
+
+Now that we have removed the outliers lets look at a simple plot of the gross square footage versus the sales price:
+
+```{r echo=FALSE}
+plot(mh.homes$gross.sqft,mh.homes$sale.price.n)
+```  
+
+While the above plot shows our trend lets move onto adding a line of best fit, box plots, and standard deviation bands to best visualize this data:
+
+```{r echo=FALSE}
+library(car)
+scatterplot(mh.homes$sale.price.n ~ mh.homes$gross.sqft, data=mh.homes, main="Sales Price vs Gross Square Footage", xlab="Gross Square Footage", ylab="Sales Price (MM)")
+```  
+
+With the above chart we can clearly visualize the trend that we are seeing. It is very clear that there is a positive correlation between the gross square footage of a 1, 2, or 3 family home and the sales price.
