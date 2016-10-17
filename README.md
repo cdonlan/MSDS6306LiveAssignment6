@@ -6,6 +6,6 @@
 
 This repository contains an analysis of rolling housing sales for NYC. It specifically focuses on the borough of Manhattan. 
 This project contains the following directories….
-+Data
-+Analysis
-+Paper
+*Data
+*Analysis
+*Paper
