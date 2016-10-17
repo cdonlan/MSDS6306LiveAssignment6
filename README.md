@@ -9,6 +9,6 @@ This repository contains an analysis of rolling housing sales for NYC. It specif
 This project contains the following directories….
 
 ##Project Structure
-* Data - Contains an excel file of Manhattan housing sales
-* Analysis - Contains R file for analysis
+* Data - Contains an excel and csv files of Manhattan housing sales data
+* Analysis - Contains R file used for analysis
 * Paper - Contains HTML and Markdown file of analysis 
