@@ -248,18 +248,18 @@ In order to load the data we used the read.csv function after we placed the csv 
 
 Let us now move onto our findings for the exploratory data analysis. We only analyzed the 1, 2, and 3 family homes. First, we will plot these homes as a log10 chart of the Gross Square Footage versus the Sales Price. From this we can see that we have several outliers but that there is also a minor trend showing the possibility of the sales price increasing as the gross square footage increases.
 
-![](Live Session 6 Assignment/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](https://github.com/cdonlan/MSDS6306LiveAssignment6/blob/master/Figures-HTML/unnamed-chunk-2-1.png)<!-- -->
 
 In order to investigate this further, we will now remove the outliers we saw in the log10 plot. After removing the outliers we visualized the data with a natural log plot. Below we can see that there is a clearer trend of increasing sales price as the gross square footage increases as compared to the log10 plot.
 
-![](Live Session 6 Assignment/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](https://github.com/cdonlan/MSDS6306LiveAssignment6/blob/master/Figures-HTML/unnamed-chunk-3-1.png)<!-- -->
 
 Now that we have removed the outliers lets look at a simple plot of the gross square footage versus the sales price:
 
-![](Live Session 6 Assignment/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](https://github.com/cdonlan/MSDS6306LiveAssignment6/blob/master/Figures-HTML/unnamed-chunk-4-1.png)<!-- -->
 
 While the above plot shows our trend lets move onto adding a line of best fit, box plots, and standard deviation bands to best visualize this data:
 
-![](Live Session 6 Assignment/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](https://github.com/cdonlan/MSDS6306LiveAssignment6/blob/master/Figures-HTML/unnamed-chunk-5-1.png)<!-- -->
 
 With the above chart we can clearly visualize the trend that we are seeing. It is very clear that there is a positive correlation between the gross square footage of a 1, 2, or 3 family home and the sales price.
